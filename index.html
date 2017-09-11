@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="React Component">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="https://unpkg.com/react@latest/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script type="text/babel">
+class IndecisionApp extends React.Component{
+	render(){
+		const title='Indecision APP!';
+		const subtitle='show off your skill';
+		const options=['th1','th2','th4'];
+	  return(
+			<div>
+					<Headers title={title}
+									 subtitle={subtitle}/>
+					<Action />
+					<Options options={options}/>
+					<AddOption />
+			</div>		
+		);
+	}
+}
+
+
+class Headers extends React.Component{
+	render(){
+	  return (
+			<div>
+				<h1>{this.props.title}</h1>
+				<h2>{this.props.subtitle}</h2>
+			</div>
+		);
+	}
+}
+
+class Action extends React.Component{
+	handlePick(){
+		alert('hi');
+	}
+	render(){
+	  return (
+			<div>
+				<button onClick={this.handlePick}>What should I do?</button>
+			</div>
+		);
+	}
+}
+
+class Options extends React.Component{
+	handleRemoveAll(){
+		alert('removeAll');
+	}
+	render(){
+	  return (
+			<div>
+				<button onClick={this.handleRemoveAll}>Remove All</button>
+				{this.props.options.map(option=><p key={option}>{option}</p>)}
+			</div>
+		);
+	}
+}
+
+
+class Option extends React.Component{
+	render(){
+		return(
+			<div>
+				<p>this is option1</p>
+			</div>
+		);
+	}
+}
+
+class AddOption extends React.Component{
+	handleAddOption(e){
+	  e.preventDefault();
+		const option=e.target.elements.option.value.trim();
+		if(option){
+		  alert(option);
+		}
+	}
+	render(){
+	  	  return (
+			<div>
+				<h4>This is a add option form!</h4>
+				<form onSubmit={this.handleAddOption}>
+					<input type='text' name='option' />
+					<button>Submit</button>
+				</form>
+			</div>
+		);
+	}
+}
+
+
+
+ReactDOM.render(<IndecisionApp />,document.getElementById('app'))
+
+
+</script>
+<title>Indecision App</title>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+</body>
+</html>
